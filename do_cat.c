@@ -4,21 +4,26 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <string.h>
+
 
 #define BUFFER_SIZE 2048
+#define  DEFAULT_FILENAME_LEN 20
 
 static void do_cat(const char* path);
 static void errormsg(const char* s);
 
 int main(int argc, char* argv[]){
   int i;
+  char filename[DEFAULT_FILENAME_LEN][256];
 
-  if(argc < 2){
-    fprintf(stderr, "%s: file name is not given \n", argv[1]);
-  }
+      for (i=0; i<argc; i++){
+          strcpy(filename[i], argv[i]);
+      }
+
 
   for(i=0; i<argc; i++){
-    do_cat(argv[i]);
+    do_cat(filename[i]);
   }
 }
 
